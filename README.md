@@ -1,1 +1,3 @@
-# lazy-wizard
+# The Lazy Summoner
+
+game link coming soon
