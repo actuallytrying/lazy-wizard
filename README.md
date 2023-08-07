@@ -1,3 +1,5 @@
 # The Lazy Summoner
 
-game link coming soon
+## Play the Demo
+[Click here to play the demo of the game!](https://actuallytrying.github.io/lazy-wizard/)
+
