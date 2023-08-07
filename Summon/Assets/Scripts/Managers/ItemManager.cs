@@ -60,15 +60,13 @@ public class ItemManager : MonoBehaviour
     void PopulateItems()
     {
         Items = new List<Item>();
-        string folderPath = "Assets/Objects/Items";  // Replace with your folder path
+        string folderPath = "Objects/Items"; 
 
-        // Get file paths of all ScriptableObject files in the folder
-        string[] filePaths = Directory.GetFiles(folderPath, "*.asset");
+        // Load all items from the folder
+        Item[] itemsArray = Resources.LoadAll<Item>(folderPath);
 
-        // Load each file as a ScriptableObject and add to the list
-        foreach (string filePath in filePaths)
+        foreach (Item item in itemsArray)
         {
-            Item item = AssetDatabase.LoadAssetAtPath<Item>(filePath);
             if (item != null)
             {
                 Items.Add(item);
@@ -77,6 +75,7 @@ public class ItemManager : MonoBehaviour
 
         Debug.Log("Loaded " + Items.Count + " items.");
     }
+
 
     public void ApplyItemEffects()
     {
