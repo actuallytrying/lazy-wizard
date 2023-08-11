@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MonsterSlot : MonoBehaviour
+
+public class MonsterSlot : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] Image icon;
     [SerializeField] Image iconBorder;
@@ -12,8 +15,14 @@ public class MonsterSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI powerText;
     [SerializeField] Sprite defaultSprite;
 
+    public Monster currentMonster; 
+    public delegate void MonsterHovered(Monster monster);
+    public static event MonsterHovered OnMonsterHovered;
+
     public void SetMonster(Monster monster)
     {
+        currentMonster = monster;
+
         if (monster.level == 0)
         {
             icon.sprite = defaultSprite;
@@ -24,27 +33,13 @@ public class MonsterSlot : MonoBehaviour
             icon.sprite = monster.image;
             nameText.text = monster.title;
             powerText.text = monster.GetPower().ToString();
-            SetBorderFromRarity(monster.rarity);
+            iconBorder.color = RarityColors.GetColorFromRarity(monster.rarity);
         } 
     }
 
-    public void SetBorderFromRarity(Rarity rarity)
+    public void OnPointerEnter(PointerEventData eventData) 
     {
-        switch (rarity)
-        {
-            case Rarity.Common:
-                iconBorder.color = Color.white;
-                break;
-            case Rarity.Rare:
-                iconBorder.color = Color.blue;
-                break;
-            case Rarity.Epic:
-                iconBorder.color = new Color(0.5f, 0f, 0.5f); 
-                break;
-            case Rarity.Legendary:
-                iconBorder.color = new Color(1f, 0.5f, 0f); 
-                break;
-        }
+        OnMonsterHovered?.Invoke(currentMonster);
     }
 }
 
