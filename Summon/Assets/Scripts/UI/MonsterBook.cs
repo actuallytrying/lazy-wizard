@@ -11,7 +11,10 @@ public class MonsterBook : MonoBehaviour
     [SerializeField]
     public List<Page> tier2Pages;
 
-    // Assuming each tier has exactly 2 pages
+    
+    public List<Page> GetPages() {
+        return tier1Pages.Concat(tier2Pages).ToList();
+    }
     public List<Page> GetPagesByTier(Tier tier)
     {
         List<Page> tierPages;
@@ -28,23 +31,7 @@ public class MonsterBook : MonoBehaviour
                 return null; // or handle error as needed
         }
 
-        float percentageUnlocked = CalculateUnlockedPercentage(tierPages[0]);
-        if (percentageUnlocked >= 0.9f)
-        {
-            return tierPages; // Return all pages in the tier
-        }
-        else
-        {
-            return new List<Page> { tierPages[0] }; // Return only the first page in the tier
-        }
-    }
-
-    private float CalculateUnlockedPercentage(Page page)
-    {
-        int totalMonsters = page.monsters.Count;
-        int unlockedMonsters = page.monsters.Count(monster => monster.level > 0);
-
-        return totalMonsters > 0 ? (float)unlockedMonsters / totalMonsters : 0;
+        return tierPages; 
     }
 }
 

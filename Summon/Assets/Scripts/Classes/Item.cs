@@ -21,7 +21,7 @@ public enum EffectApplication
 }
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
-public class Item : ScriptableObject
+public class Item : ScriptableObject, ICollectible
 {
     public string title;
     public Sprite sprite;
@@ -29,6 +29,10 @@ public class Item : ScriptableObject
     public bool applied = false;
     public float dropChance = 0.01f;
     public List<ItemEffect> effects = new List<ItemEffect>();
+
+    public string GetTitle() => title;
+    public Sprite GetImage() => sprite;
+    public bool IsUnlocked() => unlocked;
 
 #if UNITY_EDITOR
     // Register the callback when the scriptable object is loaded.

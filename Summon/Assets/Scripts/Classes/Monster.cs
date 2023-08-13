@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Monster", menuName = "Monster")]
-public class Monster : ScriptableObject, IFighter
+public class Monster : ScriptableObject, IFighter, ICollectible
 {
     public string title;
     public Sprite image;
@@ -24,6 +24,10 @@ public class Monster : ScriptableObject, IFighter
     public Class Class => monsterClass;
     public Element Element => element;
 
+
+    public string GetTitle() => Title;
+    public Sprite GetImage() => Image;
+    public bool IsUnlocked() => level > 0;
 
     public int GetPower()
     {

@@ -133,7 +133,8 @@ MonoBehaviour:
   iconBorder: {fileID: 170353505028325060}
   nameText: {fileID: 337988664613281864}
   powerText: {fileID: 7005862355625564041}
-  defaultSprite: {fileID: 21300000, guid: ea31c153380b7a4409621f1c7c7dbc88, type: 3}
+  defaultSprite: {fileID: 21300000, guid: f13f0db7952ea2b44aa4d03cd551f567, type: 3}
+  currentMonster: {fileID: 0}
 --- !u!1 &3797321882992011970
 GameObject:
   m_ObjectHideFlags: 0
