@@ -16,11 +16,13 @@ public class BookManager : MonoBehaviour, IScreen
     [Header("Prefabs")]
     [SerializeField] private GameObject monsterSlotPrefab;
     [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private GameObject dummySlotPrefab;
 
     [Header("UI")]
     [SerializeField] private Transform firstPageParent;
     [SerializeField] private Transform secondPageParent;
     [SerializeField] private TextMeshProUGUI pageTitle;
+    [SerializeField] private int itemsPerPage;
 
     private CollectibleType currentType = CollectibleType.Monster; // Default
     private List<ICollectible> allCollectibles;
@@ -63,12 +65,12 @@ public class BookManager : MonoBehaviour, IScreen
         pageTitle.text = "Pages: " + (currentPageIndex + 1) + " - " + (currentPageIndex + 2);
         allCollectibles = FetchCollectibles(currentType);
 
-        int startIndex = currentPageIndex * 32;
-        int endIndex = Mathf.Min(startIndex + 32, allCollectibles.Count);
+        int startIndex = currentPageIndex * itemsPerPage * 2;  // Assuming 2 pages per view.
+        int endIndex = Mathf.Min(startIndex + itemsPerPage * 2, allCollectibles.Count);
 
         for (int i = startIndex; i < endIndex; i++)
         {
-            Transform parent = i < startIndex + 16 ? firstPageParent : secondPageParent;
+            Transform parent = i < startIndex + itemsPerPage ? firstPageParent : secondPageParent;
             GameObject slotPrefab;
 
             if (currentType == CollectibleType.Monster)
@@ -81,16 +83,30 @@ public class BookManager : MonoBehaviour, IScreen
             }
 
             GameObject slot = Instantiate(slotPrefab, parent);
-            if (currentType == CollectibleType.Monster)
+            if (i < allCollectibles.Count)  // Ensure the index isn't out of range.
             {
-                slot.GetComponent<MonsterSlot>().SetMonster(allCollectibles[i] as Monster);
-            }
-            else
-            {
-                slot.GetComponent<ItemBookSlot>().SetItem(allCollectibles[i] as Item);
+                if (currentType == CollectibleType.Monster)
+                {
+                    slot.GetComponent<MonsterSlot>().SetMonster(allCollectibles[i] as Monster);
+                }
+                else
+                {
+                    slot.GetComponent<ItemBookSlot>().SetItem(allCollectibles[i] as Item);
+                }
             }
         }
+
+        // Fill the remaining vacant slots with dummy slots.
+        int itemsInBothPages = itemsPerPage * 2;
+        int currentItemsInBothPages = endIndex - startIndex;
+        int dummySlotsToAdd = itemsInBothPages - currentItemsInBothPages;
+        for (int i = 0; i < dummySlotsToAdd; i++)
+        {
+            Transform parent = (endIndex + i) < startIndex + itemsPerPage ? firstPageParent : secondPageParent;
+            Instantiate(dummySlotPrefab, parent);
+        }
     }
+
 
     private List<ICollectible> FetchCollectibles(CollectibleType type)
     {

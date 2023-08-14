@@ -378,7 +378,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 50, y: 50}
+  m_Spacing: {x: 40, y: 40}
   m_Constraint: 1
   m_ConstraintCount: 4
 --- !u!1 &57314607
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Area 1
+  m_text: Page X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -4482,9 +4482,11 @@ MonoBehaviour:
   book: {fileID: 1564519516}
   monsterSlotPrefab: {fileID: 1192205890322444237, guid: 5beb76430fd1d97499e0ade60d7b2be9, type: 3}
   itemSlotPrefab: {fileID: 5238410412365880992, guid: e964e34c6d26de94b9a11763b8837461, type: 3}
+  dummySlotPrefab: {fileID: 2697389754631625963, guid: 92477ffe7bd428c43997a886cb70696b, type: 3}
   firstPageParent: {fileID: 53761508}
   secondPageParent: {fileID: 1146201825}
   pageTitle: {fileID: 254710955}
+  itemsPerPage: 16
 --- !u!225 &836199654 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 7655564284076114836, guid: b99e5a314b099f64ebc2d0947032eb08, type: 3}
@@ -5379,7 +5381,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 50, y: 50}
+  m_Spacing: {x: 40, y: 40}
   m_Constraint: 1
   m_ConstraintCount: 4
 --- !u!224 &1169660763 stripped
@@ -5504,7 +5506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7655564284076114836, guid: b99e5a314b099f64ebc2d0947032eb08, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99e5a314b099f64ebc2d0947032eb08, type: 3}
@@ -5548,7 +5550,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252322795}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
